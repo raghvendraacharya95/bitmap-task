@@ -4,7 +4,7 @@ import { Matrix } from '../../../src/models/matrix';
 
 describe('IOReader Class Tests', () => {
     describe('processLine', () => {
-        it('should process the incoming line and construct bitmap descriptions', () => {
+        it('should process the incoming line and construct bitMatrix descriptions', () => {
             const reader = new IOReader();
             reader.processLine('1');
             reader.processLine('');
@@ -17,7 +17,7 @@ describe('IOReader Class Tests', () => {
             expect(reader.matrixDetails[0].columnSize).toEqual(4);
             expect(reader.matrixDetails[0].cells).toBe('0001,0011,0110');
         });
-        it('should throw err when an invalid value of bitmap size come from the input', () => {
+        it('should throw error when an invalid value of bitmap matrix size come from the input', () => {
             const reader = new IOReader();
             reader.processLine('1');
             reader.processLine('');
