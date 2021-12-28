@@ -12,7 +12,7 @@ interface MatrixDetails {
 
 export class IOReader {
     public matrixDetails: Array<MatrixDetails>;
-    public testCases: number;
+    public testCases: number | undefined;
 
     constructor() {
         this.matrixDetails = [];
@@ -21,6 +21,7 @@ export class IOReader {
     public processLine(line: string) : null {
         if (!this.testCases) {
             this.testCases = Number(line);
+            return null;
         }
 
         if (line === '') {
@@ -33,7 +34,7 @@ export class IOReader {
                 !(Number(rowSize) >= Constants.MATRIX_SIZE_MIN_VALUE && Number(rowSize) <= Constants.MATRIX_SIZE_MAX_VALUE) ||
                 !(Number(columnSize) >= Constants.MATRIX_SIZE_MIN_VALUE && Number(columnSize) <= Constants.MATRIX_SIZE_MAX_VALUE)
             ) {
-                throw new Error(`Invalid matrix size`);
+                throw new Error('Invalid matrix size');
             }
             const newMatrixDetails: MatrixDetails = {
                 rowSize: Number(rowSize),
@@ -65,8 +66,7 @@ export class IOReader {
                     cells.push(newCell);
                 }
             }
-            const bitmap = new Matrix(rowSize, columnSize, cells);
-            bitMatrix.push(bitmap);
+            bitMatrix.push(new Matrix(rowSize, columnSize, cells));
         });
         return bitMatrix;
     };

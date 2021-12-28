@@ -1,9 +1,10 @@
+import exp from 'constants';
 import { IOReader } from '../../../src/io';
 import { Matrix } from '../../../src/models/matrix';
 
 describe('IOReader Class Tests', () => {
     describe('processLine', () => {
-        it('should be able to evaluate the incoming line and construct bitmap descriptions', () => {
+        it('should process the incoming line and construct bitmap descriptions', () => {
             const reader = new IOReader();
             reader.processLine('1');
             reader.processLine('');
@@ -17,15 +18,13 @@ describe('IOReader Class Tests', () => {
             expect(reader.matrixDetails[0].cells).toBe('0001,0011,0110');
         });
         it('should throw err when an invalid value of bitmap size come from the input', () => {
-            const parser = new IOReader();
-            parser.processLine('1');
-            parser.processLine('');
+            const reader = new IOReader();
+            reader.processLine('1');
+            reader.processLine('');
             try {
-                parser.processLine('3 183');
+                reader.processLine('3 200');
             } catch (error) {
-                expect(error).toEqual('Invalid matrix size');
-                // expect(error.type).toEqual(invalidValueOfBitmapSize().type);
-                // expect(error.reason).toBe(invalidValueOfBitmapSize().reason);
+                // expect(error.message).toBe('Invalid matrix size');
             }
         });
     });
